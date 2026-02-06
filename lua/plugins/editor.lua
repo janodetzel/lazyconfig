@@ -6,13 +6,4 @@ return {
       { "<C-w>r", "<cmd>WinResizerStartResize<CR>", desc = "Resize window" },
     },
   },
-
-  -- Cursor Agent (AI assistant via Cursor CLI)
-  {
-    "Sarctiann/cursor-agent.nvim",
-    dependencies = {
-      "folke/snacks.nvim",
-    },
-    opts = {},
-  },
 }
