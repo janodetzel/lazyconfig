@@ -6,4 +6,5 @@ return {
       { "<C-w>r", "<cmd>WinResizerStartResize<CR>", desc = "Resize window" },
     },
   },
+
 }
