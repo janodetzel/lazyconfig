@@ -10,6 +10,10 @@ map("n", "<C-d>", "<C-d>zz", { desc = "Center on <C-d>" })
 
 -- Save buffer
 map("n", "<Leader>w", "<cmd>w<CR>", { desc = "Write buffer" })
+map("n", "<leader>c", function()
+  Snacks.bufdelete()
+end, { desc = "Close Buffer" })
+map("n", "<leader>C", "<cmd>bd<CR>", { desc = "Close Buffer and Window" })
 
 -- Find current word / grep root dir aliases
 map("n", "<leader>fc", function()
@@ -39,37 +43,11 @@ end, { desc = "Toggle focus file browser" })
 -- Move code keymaps from <leader>c to <leader>l and free lazy-related defaults
 vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>L")
+vim.keymap.del("n", "<leader>cd")
+vim.keymap.del("n", "<leader>cf")
+vim.keymap.del("x", "<leader>cf")
 
-local wk_ok, wk = pcall(require, "which-key")
-if wk_ok then
-  wk.add({
-    { "<leader>l", group = "lsp", icon = { icon = " ", color = "orange" } },
-    { "<leader>la", desc = "Code Action", mode = { "n", "x" }, icon = { icon = " ", color = "orange" } },
-    { "<leader>lA", desc = "Source Action", icon = { icon = " ", color = "orange" } },
-    { "<leader>lf", desc = "Format", mode = { "n", "x" }, icon = { icon = " ", color = "cyan" } },
-    { "<leader>li", desc = "Lsp Info", icon = { icon = " ", color = "azure" } },
-    { "<leader>lr", desc = "Rename", icon = { icon = "󰑕 ", color = "yellow" } },
-    { "<leader>ld", desc = "Line Diagnostics", icon = { icon = "󱖫 ", color = "green" } },
-    { "<leader>lD", desc = "Search Diagnostics", icon = { icon = "󱖫 ", color = "green" } },
-    { "<leader>ls", desc = "Document Symbols", icon = { icon = "󰠱 ", color = "purple" } },
-    { "<leader>lS", desc = "Symbols Outline", icon = { icon = "󰠱 ", color = "purple" } },
-  })
-end
-
-map({ "n", "x" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
-map("n", "<leader>lA", LazyVim.lsp.action.source, { desc = "Source Action" })
+map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map({ "n", "x" }, "<leader>lf", function()
   LazyVim.format({ force = true })
 end, { desc = "Format" })
-map("n", "<leader>li", function()
-  Snacks.picker.lsp_config()
-end, { desc = "Lsp Info" })
-map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
-map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "<leader>lD", function()
-  Snacks.picker.diagnostics()
-end, { desc = "Search Diagnostics" })
-map("n", "<leader>ls", function()
-  Snacks.picker.lsp_symbols({ filter = LazyVim.config.kind_filter })
-end, { desc = "Document Symbols" })
-map("n", "<leader>lS", "<cmd>Trouble symbols toggle<cr>", { desc = "Symbols Outline" })
