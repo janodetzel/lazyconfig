@@ -5,25 +5,26 @@
 local map = vim.keymap.set
 
 -- Center cursor after half-page scroll
-map("n", "<C-u>", "<C-u>zz", { desc = "Center on <C-u>" })
 map("n", "<C-d>", "<C-d>zz", { desc = "Center on <C-d>" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Center on <C-u>" })
 
 -- Save buffer
-map("n", "<Leader>w", "<cmd>w<CR>", { desc = "Write buffer" })
+map("n", "<leader>C", "<cmd>bd<CR>", { desc = "Close Buffer and Window" })
 map("n", "<leader>c", function()
   Snacks.bufdelete()
 end, { desc = "Close Buffer" })
-map("n", "<leader>C", "<cmd>bd<CR>", { desc = "Close Buffer and Window" })
+map("n", "<Leader>w", "<cmd>w<CR>", { desc = "Write buffer" })
 
 -- Find current word / grep root dir aliases
+map("n", "<leader>fF", LazyVim.pick("files", { root = false, hidden = true, ignored = true }), { desc = "Find all files (cwd)" })
 map("n", "<leader>fc", function()
   Snacks.picker.grep_word()
 end, { desc = "Find current word" })
 map("n", "<leader>fw", "<leader>/", { remap = true, desc = "Find word (Grep root dir)" })
 
 -- File browser (Snacks explorer)
-vim.keymap.del("n", "<Leader>e")
 vim.keymap.del("n", "<Leader>E")
+vim.keymap.del("n", "<Leader>e")
 
 map("n", "<Leader>e", function()
   Snacks.explorer({ cwd = LazyVim.root() })
@@ -41,11 +42,11 @@ map("n", "<Leader>o", function()
 end, { desc = "Toggle focus file browser" })
 
 -- Move code keymaps from <leader>c to <leader>l and free lazy-related defaults
-vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>L")
 vim.keymap.del("n", "<leader>cd")
 vim.keymap.del("n", "<leader>cf")
 vim.keymap.del("x", "<leader>cf")
+vim.keymap.del("n", "<leader>l")
 
 map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map({ "n", "x" }, "<leader>lf", function()

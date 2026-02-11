@@ -1,21 +1,5 @@
 return {
   {
-    "LazyVim/LazyVim",
-    keys = {
-      { "<leader>cd", false, mode = "n" },
-      { "<leader>cf", false, mode = { "n", "x" } },
-      { "<leader>ld", vim.diagnostic.open_float, mode = "n", desc = "Line Diagnostics" },
-      {
-        "<leader>lf",
-        function()
-          LazyVim.format({ force = true })
-        end,
-        mode = { "n", "x" },
-        desc = "Format",
-      },
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
       opts.servers = opts.servers or {}
