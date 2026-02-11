@@ -11,6 +11,12 @@ map("n", "<C-d>", "<C-d>zz", { desc = "Center on <C-d>" })
 -- Save buffer
 map("n", "<Leader>w", "<cmd>w<CR>", { desc = "Write buffer" })
 
+-- Find current word / grep root dir aliases
+map("n", "<leader>fc", function()
+  Snacks.picker.grep_word()
+end, { desc = "Find current word" })
+map("n", "<leader>fw", "<leader>/", { remap = true, desc = "Find word (Grep root dir)" })
+
 -- File browser (Snacks explorer)
 vim.keymap.del("n", "<Leader>e")
 vim.keymap.del("n", "<Leader>E")
