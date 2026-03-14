@@ -47,12 +47,17 @@ map("n", "<Leader>o", function()
 end, { desc = "Toggle focus file browser" })
 
 -- Obsidian
-map("n", "<Leader>OO", "<cmd>Obsidian quick_switch<CR>", { desc = "Obsidian Quick Switch" })
 map("n", "<Leader>On", "<cmd>Obsidian new<CR>", { desc = "Obsidian New Note" })
 map("n", "<Leader>Ot", "<cmd>Obsidian today<CR>", { desc = "Obsidian Today" })
 map("n", "<Leader>Oy", "<cmd>Obsidian yesterday<CR>", { desc = "Obsidian Yesterday" })
-map("n", "<Leader>OS", "<cmd>Obsidian search<CR>", { desc = "Obsidian Search" })
-map("n", "<Leader>Ob", "<cmd>Obsidian backlinks<CR>", { desc = "Obsidian Backlinks" })
+
+map("n", "<Leader>Of", "", { desc = "Obsidian Find" })
+map("n", "<Leader>Ofw", "<cmd>Obsidian search<CR>", { desc = "Search words" })
+map("n", "<Leader>Off", "<cmd>Obsidian quick_switch<CR>", { desc = "Search files" })
+map("n", "<Leader>Ofb", "<cmd>Obsidian backlinks<CR>", { desc = "Search Backlinks" })
+map("n", "<Leader>Ofl", "<cmd>Obsidian links<CR>", { desc = "Search Links" })
+map("n", "<Leader>Oft", "<cmd>Obsidian tags<CR>", { desc = "Search Tags" })
+
 map("n", "<Leader>Ow", "", { desc = "Obsidian Workspaces" })
 map("n", "<Leader>Oww", "<cmd>Obsidian workspace work<CR>", { desc = "Workspace Work" })
 map("n", "<Leader>Owp", "<cmd>Obsidian workspace personal<CR>", { desc = "Workspace Personal" })
