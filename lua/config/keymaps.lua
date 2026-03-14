@@ -16,7 +16,12 @@ end, { desc = "Close Buffer" })
 map("n", "<Leader>w", "<cmd>w<CR>", { desc = "Write buffer" })
 
 -- Find current word / grep root dir aliases
-map("n", "<leader>fF", LazyVim.pick("files", { root = false, hidden = true, ignored = true }), { desc = "Find all files (cwd)" })
+map(
+  "n",
+  "<leader>fF",
+  LazyVim.pick("files", { root = false, hidden = true, ignored = true }),
+  { desc = "Find all files (cwd)" }
+)
 map("n", "<leader>fc", function()
   Snacks.picker.grep_word()
 end, { desc = "Find current word" })
@@ -40,6 +45,17 @@ map("n", "<Leader>o", function()
     Snacks.explorer({ cwd = LazyVim.root() })
   end
 end, { desc = "Toggle focus file browser" })
+
+-- Obsidian
+map("n", "<Leader>OO", "<cmd>Obsidian quick_switch<CR>", { desc = "Obsidian Quick Switch" })
+map("n", "<Leader>On", "<cmd>Obsidian new<CR>", { desc = "Obsidian New Note" })
+map("n", "<Leader>Ot", "<cmd>Obsidian today<CR>", { desc = "Obsidian Today" })
+map("n", "<Leader>Oy", "<cmd>Obsidian yesterday<CR>", { desc = "Obsidian Yesterday" })
+map("n", "<Leader>OS", "<cmd>Obsidian search<CR>", { desc = "Obsidian Search" })
+map("n", "<Leader>Ob", "<cmd>Obsidian backlinks<CR>", { desc = "Obsidian Backlinks" })
+map("n", "<Leader>Ow", "", { desc = "Obsidian Workspaces" })
+map("n", "<Leader>Oww", "<cmd>Obsidian workspace work<CR>", { desc = "Workspace Work" })
+map("n", "<Leader>Owp", "<cmd>Obsidian workspace personal<CR>", { desc = "Workspace Personal" })
 
 -- Move code keymaps from <leader>c to <leader>l and free lazy-related defaults
 vim.keymap.del("n", "<leader>L")
