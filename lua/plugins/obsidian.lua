@@ -31,8 +31,8 @@ return {
         time_format = "%H:%M",
       },
       completion = {
-        blink = true,
-        nvim_cmp = false,
+        blink = false,
+        nvim_cmp = true,
       },
       -- callbacks = {
       --   enter_note = function()

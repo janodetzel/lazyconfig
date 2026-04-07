@@ -71,11 +71,12 @@ return {
     },
   },
   {
-    "saghen/blink.cmp",
+    "hrsh7th/nvim-cmp",
     opts = function(_, opts)
-      opts.keymap = opts.keymap or {}
-      opts.keymap["<C-j>"] = { "select_next", "fallback" }
-      opts.keymap["<C-k>"] = { "select_prev", "fallback" }
+      local cmp = require("cmp")
+      opts.mapping = opts.mapping or {}
+      opts.mapping["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+      opts.mapping["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
     end,
   },
   {
