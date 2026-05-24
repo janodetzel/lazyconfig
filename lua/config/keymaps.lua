@@ -25,7 +25,16 @@ map(
 map("n", "<leader>fc", function()
   Snacks.picker.grep_word()
 end, { desc = "Find current word" })
-map("n", "<leader>fw", "<leader>/", { remap = true, desc = "Find word (Grep root dir)" })
+map("n", "<leader>f<BS>", function()
+  Snacks.picker.resume()
+end, { desc = "Open last picker" })
+map("n", "<leader>fw", "<leader>/", { remap = true, desc = "Find word (root dir)" })
+map(
+  { "n", "x" },
+  "<leader>fW",
+  LazyVim.pick("grep", { root = false, hidden = true, ignored = true }),
+  { desc = "Find word (cwd)" }
+)
 
 -- File browser (Snacks explorer)
 vim.keymap.del("n", "<Leader>E")
