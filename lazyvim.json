@@ -5,7 +5,8 @@
     "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.formatting.prettier",
     "lazyvim.plugins.extras.lang.typescript.biome",
-    "lazyvim.plugins.extras.coding.nvim-cmp"
+    "lazyvim.plugins.extras.coding.nvim-cmp",
+    "lazyvim.plugins.extras.lang.tailwind"
   ],
   "install_version": 8,
   "news": {
