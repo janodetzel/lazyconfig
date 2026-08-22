@@ -1,5 +1,7 @@
 return {
   "github/copilot.vim",
+  event = "InsertEnter",
+  cmd = "Copilot",
   init = function()
     local group = vim.api.nvim_create_augroup("copilot_disable_env_files", { clear = true })
     vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {

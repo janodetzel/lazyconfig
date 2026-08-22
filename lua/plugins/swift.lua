@@ -18,6 +18,48 @@ return {
   ---------------------------------------------------------------------------
   {
     "wojciech-kulik/xcodebuild.nvim",
+    cmd = {
+      "XcodebuildPicker",
+      "XcodebuildProjectManager",
+      "XcodebuildBuild",
+      "XcodebuildBuildForTesting",
+      "XcodebuildBuildRun",
+      "XcodebuildTest",
+      "XcodebuildTestSelected",
+      "XcodebuildTestClass",
+      "XcodebuildTestRepeat",
+      "XcodebuildToggleLogs",
+      "XcodebuildToggleCodeCoverage",
+      "XcodebuildShowCodeCoverageReport",
+      "XcodebuildTestExplorerToggle",
+      "XcodebuildFailingSnapshots",
+      "XcodebuildPreviewGenerateAndShow",
+      "XcodebuildPreviewToggle",
+      "XcodebuildSelectDevice",
+      "XcodebuildQuickfixLine",
+      "XcodebuildCodeActions",
+    },
+    keys = {
+      { "<leader>X", "<cmd>XcodebuildPicker<cr>", desc = "Show Xcodebuild Actions" },
+      { "<leader>xf", "<cmd>XcodebuildProjectManager<cr>", desc = "Show Project Manager Actions" },
+      { "<leader>xb", "<cmd>XcodebuildBuild<cr>", desc = "Build Project" },
+      { "<leader>xB", "<cmd>XcodebuildBuildForTesting<cr>", desc = "Build For Testing" },
+      { "<leader>xr", "<cmd>XcodebuildBuildRun<cr>", desc = "Build & Run Project" },
+      { "<leader>xt", "<cmd>XcodebuildTest<cr>", desc = "Run Tests" },
+      { "<leader>xt", "<cmd>XcodebuildTestSelected<cr>", mode = "v", desc = "Run Selected Tests" },
+      { "<leader>xT", "<cmd>XcodebuildTestClass<cr>", desc = "Run Current Test Class" },
+      { "<leader>x.", "<cmd>XcodebuildTestRepeat<cr>", desc = "Repeat Last Test Run" },
+      { "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", desc = "Toggle Xcodebuild Logs" },
+      { "<leader>xc", "<cmd>XcodebuildToggleCodeCoverage<cr>", desc = "Toggle Code Coverage" },
+      { "<leader>xC", "<cmd>XcodebuildShowCodeCoverageReport<cr>", desc = "Show Code Coverage Report" },
+      { "<leader>xe", "<cmd>XcodebuildTestExplorerToggle<cr>", desc = "Toggle Test Explorer" },
+      { "<leader>xs", "<cmd>XcodebuildFailingSnapshots<cr>", desc = "Show Failing Snapshots" },
+      { "<leader>xp", "<cmd>XcodebuildPreviewGenerateAndShow<cr>", desc = "Generate Preview" },
+      { "<leader>x<cr>", "<cmd>XcodebuildPreviewToggle<cr>", desc = "Toggle Preview" },
+      { "<leader>xd", "<cmd>XcodebuildSelectDevice<cr>", desc = "Select Device" },
+      { "<leader>xx", "<cmd>XcodebuildQuickfixLine<cr>", desc = "Quickfix Line" },
+      { "<leader>xa", "<cmd>XcodebuildCodeActions<cr>", desc = "Show Code Actions" },
+    },
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-tree/nvim-tree.lua",
@@ -27,32 +69,6 @@ return {
       require("xcodebuild").setup({
         -- default settings work well; override only what you need
       })
-
-      -- Suggested key bindings (under <leader>x)
-      vim.keymap.set("n", "<leader>X", "<cmd>XcodebuildPicker<cr>", { desc = "Show Xcodebuild Actions" })
-      vim.keymap.set("n", "<leader>xf", "<cmd>XcodebuildProjectManager<cr>", { desc = "Show Project Manager Actions" })
-      vim.keymap.set("n", "<leader>xb", "<cmd>XcodebuildBuild<cr>", { desc = "Build Project" })
-      vim.keymap.set("n", "<leader>xB", "<cmd>XcodebuildBuildForTesting<cr>", { desc = "Build For Testing" })
-      vim.keymap.set("n", "<leader>xr", "<cmd>XcodebuildBuildRun<cr>", { desc = "Build & Run Project" })
-      vim.keymap.set("n", "<leader>xt", "<cmd>XcodebuildTest<cr>", { desc = "Run Tests" })
-      vim.keymap.set("v", "<leader>xt", "<cmd>XcodebuildTestSelected<cr>", { desc = "Run Selected Tests" })
-      vim.keymap.set("n", "<leader>xT", "<cmd>XcodebuildTestClass<cr>", { desc = "Run Current Test Class" })
-      vim.keymap.set("n", "<leader>x.", "<cmd>XcodebuildTestRepeat<cr>", { desc = "Repeat Last Test Run" })
-      vim.keymap.set("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", { desc = "Toggle Xcodebuild Logs" })
-      vim.keymap.set("n", "<leader>xc", "<cmd>XcodebuildToggleCodeCoverage<cr>", { desc = "Toggle Code Coverage" })
-      vim.keymap.set(
-        "n",
-        "<leader>xC",
-        "<cmd>XcodebuildShowCodeCoverageReport<cr>",
-        { desc = "Show Code Coverage Report" }
-      )
-      vim.keymap.set("n", "<leader>xe", "<cmd>XcodebuildTestExplorerToggle<cr>", { desc = "Toggle Test Explorer" })
-      vim.keymap.set("n", "<leader>xs", "<cmd>XcodebuildFailingSnapshots<cr>", { desc = "Show Failing Snapshots" })
-      vim.keymap.set("n", "<leader>xp", "<cmd>XcodebuildPreviewGenerateAndShow<cr>", { desc = "Generate Preview" })
-      vim.keymap.set("n", "<leader>x<cr>", "<cmd>XcodebuildPreviewToggle<cr>", { desc = "Toggle Preview" })
-      vim.keymap.set("n", "<leader>xd", "<cmd>XcodebuildSelectDevice<cr>", { desc = "Select Device" })
-      vim.keymap.set("n", "<leader>xx", "<cmd>XcodebuildQuickfixLine<cr>", { desc = "Quickfix Line" })
-      vim.keymap.set("n", "<leader>xa", "<cmd>XcodebuildCodeActions<cr>", { desc = "Show Code Actions" })
     end,
   },
 
@@ -61,20 +77,63 @@ return {
   ---------------------------------------------------------------------------
   {
     "mfussenegger/nvim-dap",
+    keys = {
+      {
+        "<leader>dd",
+        function()
+          require("xcodebuild.integrations.dap").build_and_debug()
+        end,
+        desc = "Build & Debug",
+      },
+      {
+        "<leader>dr",
+        function()
+          require("xcodebuild.integrations.dap").debug_without_build()
+        end,
+        desc = "Debug Without Building",
+      },
+      {
+        "<leader>dt",
+        function()
+          require("xcodebuild.integrations.dap").debug_tests()
+        end,
+        desc = "Debug Tests",
+      },
+      {
+        "<leader>dT",
+        function()
+          require("xcodebuild.integrations.dap").debug_class_tests()
+        end,
+        desc = "Debug Class Tests",
+      },
+      {
+        "<leader>db",
+        function()
+          require("xcodebuild.integrations.dap").toggle_breakpoint()
+        end,
+        desc = "Toggle Breakpoint",
+      },
+      {
+        "<leader>dB",
+        function()
+          require("xcodebuild.integrations.dap").toggle_message_breakpoint()
+        end,
+        desc = "Toggle Message Breakpoint",
+      },
+      {
+        "<leader>dx",
+        function()
+          require("xcodebuild.integrations.dap").terminate_session()
+        end,
+        desc = "Terminate Debugger",
+      },
+    },
     dependencies = {
       "wojciech-kulik/xcodebuild.nvim",
     },
     config = function()
       local xcodebuild = require("xcodebuild.integrations.dap")
       xcodebuild.setup()
-
-      vim.keymap.set("n", "<leader>dd", xcodebuild.build_and_debug, { desc = "Build & Debug" })
-      vim.keymap.set("n", "<leader>dr", xcodebuild.debug_without_build, { desc = "Debug Without Building" })
-      vim.keymap.set("n", "<leader>dt", xcodebuild.debug_tests, { desc = "Debug Tests" })
-      vim.keymap.set("n", "<leader>dT", xcodebuild.debug_class_tests, { desc = "Debug Class Tests" })
-      vim.keymap.set("n", "<leader>db", xcodebuild.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-      vim.keymap.set("n", "<leader>dB", xcodebuild.toggle_message_breakpoint, { desc = "Toggle Message Breakpoint" })
-      vim.keymap.set("n", "<leader>dx", xcodebuild.terminate_session, { desc = "Terminate Debugger" })
     end,
   },
   ---------------------------------------------------------------------------
