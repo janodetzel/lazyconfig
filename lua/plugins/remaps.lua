@@ -25,6 +25,32 @@ return {
           end,
           desc = "Lsp Info",
         },
+        {
+          "<leader>lt",
+          function()
+            local lsp = {}
+            for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+              table.insert(lsp, client.name)
+            end
+
+            local formatters = {}
+            if package.loaded["conform"] then
+              local conform_formatters, use_lsp = require("conform").list_formatters_to_run(0)
+
+              for _, formatter in ipairs(conform_formatters) do
+                table.insert(formatters, formatter.name)
+              end
+
+              if use_lsp then table.insert(formatters, "lsp-format") end
+            end
+
+            vim.notify(table.concat({
+              "LSP: " .. (#lsp > 0 and table.concat(lsp, ", ") or "none"),
+              "Formatters: " .. (#formatters > 0 and table.concat(formatters, ", ") or "none"),
+            }, "\n"), vim.log.levels.INFO, { title = "Buffer tools" })
+          end,
+          desc = "Show Buffer Tools",
+        },
         { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" }, has = "codeAction" },
         { "<leader>lc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" }, has = "codeLens" },
         { "<leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = "n", has = "codeLens" },
@@ -110,6 +136,7 @@ return {
         { "<leader>c", desc = "Close Buffer", icon = { icon = "󰅖 ", color = "red" } },
         { "<leader>C", desc = "Close Buffer and Window", icon = { icon = "󰅖 ", color = "red" } },
         { "<leader>l", group = "code", icon = { icon = " ", color = "orange" } },
+        { "<leader>n", group = "notifications" },
       })
     end,
   },
